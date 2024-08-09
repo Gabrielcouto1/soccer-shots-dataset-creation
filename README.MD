@@ -1,0 +1,1 @@
+## Análises e estudos feitos com base nos dados gratuitos providos pela StatsBomb
