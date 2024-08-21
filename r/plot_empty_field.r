@@ -16,27 +16,19 @@ plot_field <- function(width, height) {
 
     draw.circle(w/2, h/2, 9.15, border="white") # Círculo do meio campo
 
-
     draw.circle(11,h/2,9.15, border="white") # Círculo da grande área esquerda
-
-    rect(0, ((h/2)-20.16), 16.5, ((h/2)+20.16), col="green", border="white") # Grande área esquerda
-    
-    points(11, h/2, pch=19, col="white") # Marca do Penalti esquerda
-
-    rect(0, ((h/2)-9.16), 5.5, ((h/2)+9.16), border="white") # Pequena area esquerda
-
-    rect(-2.44, ((h/2)-3.66), 0, ((h/2)+3.66), border="white") # Gol esquerdo
-    
-
-    
     draw.circle(w-11, h/2, 9.15, border="white") # Círculo da grande área direita
 
+    rect(0, ((h/2)-20.16), 16.5, ((h/2)+20.16), col="green", border="white") # Grande área esquerda
     rect(w, ((h/2)-20.16), w-16.5, ((h/2)+20.16), col="green", border="white") # Grande área direita
-    
+
+    points(11, h/2, pch=19, col="white") # Marca do Penalti esquerda
     points(w-11, h/2, pch=19, col="white") # Marca do Penalti direita
 
+    rect(0, ((h/2)-9.16), 5.5, ((h/2)+9.16), border="white") # Pequena area esquerda
     rect(w, ((h/2)-9.16), w-5.5, ((h/2)+9.16), border="white") # Pequena area direita
 
+    rect(-2.44, ((h/2)-3.66), 0, ((h/2)+3.66), border="white") # Gol esquerdo
     rect(w, ((h/2)-3.66), w+2.44, ((h/2)+3.66), border="white") # Gol esquerdo
 
     # Desenhando marcas dos escanteios
