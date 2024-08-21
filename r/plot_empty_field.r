@@ -4,9 +4,9 @@ plot_field <- function(width, height) {
     h <- height
     w <- width
 
-    windows(width=w/10, height=h/10)
+    # windows(width=w/10, height=h/10)
     par(bg="green")
-    plot(1, type="n", xlim=c(0,w), ylim=c(0,h))
+    plot(1, type="n", xlim=c(0,w), ylim=c(0,h), axes=FALSE)
 
     rect(0, 0, w, h, border="white", lwd=2) # Desenhando linhas laterais do campo
 
