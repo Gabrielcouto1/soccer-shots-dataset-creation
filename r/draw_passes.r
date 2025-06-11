@@ -22,10 +22,6 @@ plot_field(width, height)
 
 for (i in 1:length(match_json)){
     if((match_json[[i]]$type$id) == 30){
-        related_event_id    <- match_json[[i]]$related_events[1]
-        related_event_index <-get_related_event_index(related_event_id, match_json)
-        related_event_type  <- match_json[[related_event_index]]$type$id
-
         source      <- match_json[[i]]$location
         destination <- match_json[[related_event_index]]$location
 

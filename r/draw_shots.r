@@ -4,9 +4,9 @@ source("./r/utils/get_distance.r")
 source("./r/utils/plot_empty_field.r")
 source("./r/utils/get_related_event_id.r")
 source("./r/utils/get_xg_proportion.r")
+
 home_team <- "Argentina"
 away_team <- "Canada"
- #TODO: SOMAR OS XG E FAZER UM NEGOCIO PARECIDO COM O CRUZEIRODATA DO MERECIMENTO! 
 match <- paste0(home_team, "_vs_", away_team)
 
 json_path  <- paste0("./data/events_copa_america_24/", match)
@@ -27,12 +27,10 @@ play_type <- c(16, 25) # 16 = shot 30 = pass
 
 for (i in 1:length(match_json)){
     current_play_type <- (match_json[[i]]$type$id)
-    if(current_play_type %in% play_type ){ 
-        if (current_play_type == 16){
-            related_event_id    <- match_json[[i]]$related_events[1]
-            related_event_index <- get_related_event_index(related_event_id, match_json)
-            related_event_type  <- match_json[[related_event_index]]$type$id
 
+    if(current_play_type %in% play_type ){ 
+        
+        if (current_play_type == 16){
             source      <- match_json[[i]]$location
             destination <- match_json[[i]]$shot$end_location
 
@@ -56,7 +54,6 @@ for (i in 1:length(match_json)){
             color_segment <- "blue"
             point_size <- 3
             if (match_json[[i]]$possession_team$name == home_team){
-                print("aaa")
                 source <- match_json[[i]]$location
                 destination <- c(120, 40)
             } 
@@ -64,7 +61,6 @@ for (i in 1:length(match_json)){
         distance<-get_distance(source, destination)
 
         points(source[1], source[2], col=color_source, pch=19, cex=point_size)
-        # points(destination[1], destination[2], col="blue", pch=19)
         segments(source[1], source[2], destination[1], destination[2], col=color_segment, lwd=1)
     }
 }
