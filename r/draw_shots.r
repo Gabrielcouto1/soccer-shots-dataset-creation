@@ -1,9 +1,9 @@
 library("rjson") 
 
-source("./r/utils/get_distance.r")
-source("./r/utils/plot_empty_field.r")
+source("./r/utils/plot/get_distance.r")
+source("./r/utils/plot/plot_empty_field.r")
 source("./r/utils/get_related_event_id.r")
-source("./r/utils/get_xg_proportion.r")
+source("./r/utils/xg/get_xg_proportion.r")
 
 home_team <- "Argentina"
 away_team <- "Canada"

@@ -1,6 +1,6 @@
 library("rjson") 
 
-source("./r/utils/get_shot_xg.r")
+source("./r/utils/xg/get_shot_xg.r")
 
 get_match_xg <- function(match){
     json_path  <- paste0("./data/events_copa_america_24/", match)
