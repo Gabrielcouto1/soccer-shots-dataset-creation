@@ -2,7 +2,7 @@ source("./r/utils/xg/simulate_match_outcome.r")
 source("./r/utils/plot/plot_gauge_chart.r")
 
 home_team <- "Argentina"
-away_team <- "Canada"
+away_team <- "Colombia"
 match <- paste0(home_team, "_vs_", away_team)
 
 match_xg <- get_match_xg(match)
