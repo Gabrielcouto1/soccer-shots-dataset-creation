@@ -1,14 +1,9 @@
-source("./r/utils/create_dataset/get_shot_data.r")
-
 library("rjson") 
 
-home_team <- "Argentina"
-away_team <- "Canada"
-match <- paste0(home_team, "_vs_", away_team)
+source("./r/utils/create_dataset/get_shot_data.r")
+source("./r/utils/get_match_json.r")
 
-json_path  <- paste0("./data/events_copa_america_24/", match)
-json_path  <- paste0(json_path, ".json")
-match_json <- fromJSON(file = json_path) 
+match_json = get_match_json("Argentina", "Canada", 1)
 
 play_type <- c(16) # 16 = shot 30 = pass
 
