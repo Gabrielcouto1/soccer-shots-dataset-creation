@@ -3,15 +3,14 @@ library("rjson")
 source("./r/utils/plot/get_distance.r")
 source("./r/utils/plot/plot_empty_field.r")
 source("./r/utils/get_related_event_id.r")
+source("./r/utils/get_match_json.r")
 
-match <- "Argentina_vs_Canada"
+home_team <- "Argentina"
+away_team <- "Canada"
 
-json_path  <- paste0("./data/events_copa_america_24/", match)
-json_path  <- paste0(json_path, ".json")
-match_json <- fromJSON(file = json_path) 
+match_json = get_match_json(home_team, away_team, 1)
 
-img_path <- paste0("./plots/passes/", match)
-img_path <- paste0(img_path, ".png")
+img_path <- paste0("./plots/passes/", home_team, "_vs_", away_team, ".png")
 
 width  <- match_json[[5]]$location[1]*2
 height <- match_json[[5]]$location[2]*2
@@ -37,5 +36,5 @@ for (i in 1:length(match_json)){
     }
 }
 
-mtext(match, side = 1, line = 2)
+mtext(paste0(home_team, " vs ", away_team), side = 1, line = 2)
 dev.off()
