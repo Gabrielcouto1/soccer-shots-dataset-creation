@@ -45,14 +45,31 @@ get_goalkeeper_distance <- function(shot){
     }
 }
 
-get_enemies_count_in_goal_area <- function(shot){
-
-}
-
-get_enemies_count_in_penalty_area <- function(shot){
+get_enemies_count_in_area <- function(shot){
+    goal_area_count    <- 0
+    penalty_area_count <- 0
     
+    for(i in 1:length(shot$shot$freeze_frame)) {
+        if (shot$shot$freeze_frame[[i]]$teammate == FALSE) {
+            x <- shot$shot$freeze_frame[[i]]$location[1]
+            y <- shot$shot$freeze_frame[[i]]$location[2]
+
+            is_in_penalty_area <- (x >= 102 && x <= 120) && (y >= 18 && y <= 62)
+            is_in_goal_area    <- (x >= 114 && x <= 120) && (y >= 30 && y <= 50)
+
+            if (is_in_penalty_area) {
+                penalty_area_count <- penalty_area_count + 1
+            }
+            if (is_in_goal_area) {
+                goal_area_count <- goal_area_count + 1
+            }
+        }
+    }
+
+    return(list(penalty_area_count=penalty_area_count,
+                goal_area_count=goal_area_count))
 }
 
 get_enemies_in_ball_trajectory <-function(shot){
-
+    return(0)
 }

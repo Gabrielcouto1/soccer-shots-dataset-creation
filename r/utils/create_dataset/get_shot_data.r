@@ -28,6 +28,19 @@ get_shot_data <- function(shot){
     
     gk_distance <- get_goalkeeper_distance(shot)
 
+    enemies_in_area <- get_enemies_count_in_area(shot)
+
+    penalty_area_count <- enemies_in_area$penalty_area_count
+    goal_area_count <- enemies_in_area$goal_area_count
+
+    enemies_in_trajectory <- get_enemies_in_ball_trajectory(shot)
+
+    if(shot$shot$outcome$id==97){
+        goal <- 1
+    }else{
+        goal <- 0
+    }
+
     return(list(shot_length=shot_length,
                 goal_distance=goal_distance,
                 goal_angle=goal_angle,
@@ -40,5 +53,9 @@ get_shot_data <- function(shot){
                 teammate_count=teammate_count,
                 enemy_count=enemy_count,
                 closets_enemy_distance=closets_enemy_distance,
-                gk_distance=gk_distance))
+                gk_distance=gk_distance,
+                penalty_area_count=penalty_area_count,
+                goal_area_count=goal_area_count,
+                enemies_in_trajectory=enemies_in_trajectory,
+                goal=goal))
 }
