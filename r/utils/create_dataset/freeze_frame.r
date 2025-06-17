@@ -1,11 +1,44 @@
-source("./r/plot/get_distance")
+source("./r/utils/plot/get_distance.r")
 
 get_teammate_count <- function(shot){
+    teammate_count <- 0
 
+    for(i in 1:length(shot$shot$freeze_frame)){
+        if (shot$shot$freeze_frame[[i]]$teammate == TRUE){
+            teammate_count <- teammate_count + 1
+        }
+    }
+    return(teammate_count)
 }
 
 get_enemy_count <- function(shot){
-    
+    enemy_count <- 0
+
+    for(i in 1:length(shot$shot$freeze_frame)){
+        if (shot$shot$freeze_frame[[i]]$teammate == FALSE){
+            enemy_count <- enemy_count + 1
+        }
+    }
+    return(enemy_count)
+}
+
+get_closest_enemy_distance <- function(shot){
+    closest_distance <- Inf
+
+    for(i in 1:length(shot$shot$freeze_frame)) {
+        if (shot$shot$freeze_frame[[i]]$teammate == FALSE) {
+            current_distance <- get_distance(shot$location, shot$shot$freeze_frame[[i]]$location)
+
+            if (current_distance < closest_distance){
+                closest_distance <- current_distance
+            }
+        }
+    }
+    return(closest_distance)
+}
+
+get_goalkeeper_distance <- function(shot){
+
 }
 
 get_enemies_count_in_goal_area <- function(shot){
@@ -13,17 +46,9 @@ get_enemies_count_in_goal_area <- function(shot){
 }
 
 get_enemies_count_in_penalty_area <- function(shot){
-
+    
 }
 
 get_enemies_in_ball_trajectory <-function(shot){
-
-}
-
-get_closest_enemy_distance <- function(shot){
-
-}
-
-get_goalkeeper_distance <- function(shot){
 
 }
