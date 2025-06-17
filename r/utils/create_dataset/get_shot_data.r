@@ -24,7 +24,9 @@ get_shot_data <- function(shot){
     teammate_count <- get_teammate_count(shot)
     enemy_count    <- get_enemy_count(shot)
 
-    closes_enemy_distance <- get_closest_enemy_distance(shot)
+    closets_enemy_distance <- get_closest_enemy_distance(shot)
+    
+    gk_distance <- get_goalkeeper_distance(shot)
 
     return(list(shot_length=shot_length,
                 goal_distance=goal_distance,
@@ -37,5 +39,6 @@ get_shot_data <- function(shot){
                 type_name=type_name,
                 teammate_count=teammate_count,
                 enemy_count=enemy_count,
-                closes_enemy_distance=closes_enemy_distance))
+                closets_enemy_distance=closets_enemy_distance,
+                gk_distance=gk_distance))
 }

@@ -38,7 +38,11 @@ get_closest_enemy_distance <- function(shot){
 }
 
 get_goalkeeper_distance <- function(shot){
-
+    for(i in 1:length(shot$shot$freeze_frame)) {
+        if (shot$shot$freeze_frame[[i]]$teammate == FALSE && shot$shot$freeze_frame[[i]]$position$id == 1 ) {
+            return(get_distance(shot$location, shot$shot$freeze_frame[[i]]$location))
+        }
+    }
 }
 
 get_enemies_count_in_goal_area <- function(shot){
