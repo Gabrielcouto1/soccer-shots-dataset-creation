@@ -12,12 +12,24 @@ get_shot_data <- function(shot){
 
     goal_angle <- get_goal_angle(source)
 
+    body_part <- shot$shot$body_part$id
+    body_part_name <- shot$shot$body_part$name
 
+    technique <- shot$shot$technique$id
+    technique_name <- shot$shot$technique$name
 
+    type <- shot$shot$type$id
+    type_name <- shot$shot$type$name
 
-    return(list(source=source, 
-                destination=destination,    
-                shot_length=shot_length,
+    
+
+    return(list(shot_length=shot_length,
                 goal_distance=goal_distance,
-                goal_angle=goal_angle))
+                goal_angle=goal_angle,
+                body_part=body_part,
+                body_part_name=body_part_name,
+                technique=technique,
+                technique_name=technique_name, 
+                type=type,
+                type_name=type_name))
 }
