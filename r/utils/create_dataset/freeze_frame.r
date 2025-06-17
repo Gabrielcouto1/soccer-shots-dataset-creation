@@ -70,6 +70,41 @@ get_enemies_count_in_area <- function(shot){
                 goal_area_count=goal_area_count))
 }
 
+cross_product_2d <- function(a, b, c){
+    # Returns > 0 if C is to the left of vector AB
+    # Returns < 0 if C is to the right of vector AB
+    # Returns = 0 if A, B, and C are collinear
+    return((b[1] - a[1]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[1] - a[1]))
+}
+
 get_enemies_in_ball_trajectory <-function(shot){
-    return(0)
+    shot_location <- shot$location 
+    post_1 <- c(120, 36)
+    post_2 <- c(120, 44)
+
+    enemies_count <- 0
+    for(i in 1:length(shot$shot$freeze_frame)) {
+        player <- shot$shot$freeze_frame[[i]]
+        if (player$teammate == FALSE){
+            player_location <- player$location
+
+            # side_1 is the line going from shot_location to post_1
+            side_1 <- cross_product_2d(shot_location, post_1, player_location)
+
+            # side_2 is the line going from post_1 to post_2
+            side_2 <- cross_product_2d(post_1, post_2, player_location)
+
+            # side_3 is the line going from shot_location to post_2
+            side_3 <- cross_product_2d(post_2, shot_location, player_location)
+
+            is_inside <- (side_1>=0 && side_2>=0 && side_3>=0) ||
+                         (side_1<=0 && side_2<=0 && side_3<=0)
+
+            if(is_inside){
+                enemies_count <- enemies_count + 1
+            }
+        }
+    }
+
+    return(enemies_count)
 }
