@@ -4,7 +4,7 @@ options("width"=200)
 source("./r/utils/create_dataset/get_shot_data.r")
 source("./r/utils/get_match_json.r")
 
-match_json = get_match_json("Argentina", "Canada", 1)
+match_json <- get_match_json("Argentina", "Canada", 1)
 
 play_type <- c(16) # 16 = shot 30 = pass
 all_shots_data <- list()
