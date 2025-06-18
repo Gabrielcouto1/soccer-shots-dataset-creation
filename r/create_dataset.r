@@ -42,7 +42,7 @@ if (length(list_of_shot_dfs) > 0) {
     print(head(all_shots_dataset))
     str(all_shots_dataset)
     
-    csv_file_path <- "./data/shots.csv"
+    csv_file_path <- "./dataset/la_liga_shots.csv"
     write.csv(all_shots_dataset, file = csv_file_path, row.names = FALSE)
     print(paste("Dataset saved to:", csv_file_path, ""))
     
