@@ -15,19 +15,31 @@ get_shot_data <- function(shot){
     body_part      <- shot$shot$body_part$name
     shot_type      <- shot$shot$type$name
 
-    teammates_in_frame <- get_teammate_count(shot)
-    opponents_in_frame <- get_enemy_count(shot)
+    if(shot$shot$type$id==88){
+        teammates_in_frame        <- 0
+        opponents_in_frame        <- 0
+        closest_opponent_dist     <- 0
+        goalkeeper_dist           <- 0
+        opponents_in_penalty_area <- 0
+        opponents_in_goal_area    <- 0
+        opponents_in_shot_path    <- 0
+        is_penalty                <- 1
+    }else{
+        teammates_in_frame <- get_teammate_count(shot)
+        opponents_in_frame <- get_enemy_count(shot)
 
-    closest_opponent_dist <- get_closest_enemy_distance(shot)
-    
-    goalkeeper_dist <- get_goalkeeper_distance(shot)
+        closest_opponent_dist <- get_closest_enemy_distance(shot)
 
-    enemies_in_area <- get_enemies_count_in_area(shot)
+        goalkeeper_dist <- get_goalkeeper_distance(shot)
 
-    opponents_in_penalty_area <- enemies_in_area$penalty_area_count
-    opponents_in_goal_area <- enemies_in_area$goal_area_count
+        enemies_in_area <- get_enemies_count_in_area(shot)
 
-    opponents_in_shot_path <- get_enemies_in_ball_trajectory(shot)
+        opponents_in_penalty_area <- enemies_in_area$penalty_area_count
+        opponents_in_goal_area <- enemies_in_area$goal_area_count
+
+        opponents_in_shot_path <- get_enemies_in_ball_trajectory(shot)
+        is_penalty <- 0
+    }
 
     if(shot$shot$outcome$id==97){
         is_goal <- 1
@@ -48,5 +60,6 @@ get_shot_data <- function(shot){
                 opponents_in_penalty_area=opponents_in_penalty_area,
                 opponents_in_goal_area=opponents_in_goal_area,
                 opponents_in_shot_path=opponents_in_shot_path,
+                is_penalty=is_penalty,
                 is_goal=is_goal))
 }
