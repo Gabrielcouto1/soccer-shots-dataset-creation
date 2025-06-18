@@ -5,7 +5,7 @@ options("width"=200)
 source("./r/utils/create_dataset/get_shot_data.r")
 source("./r/utils/get_match_json.r")
 
-competition_folder <- "./data/events_copa_america_24/"
+competition_folder <- "./data/events_la_liga/"
 
 all_matches_jsons <- list.files(path=competition_folder, pattern="\\.json$", full.names=TRUE)
 
