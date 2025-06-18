@@ -8,8 +8,9 @@ source("./r/utils/get_match_json.r")
 
 home_team <- "Argentina"
 away_team <- "Canada"
+competition <- "copa_america_24"
 
-match_json = get_match_json(home_team, away_team, 1)
+match_json = get_match_json(home_team, away_team, competition)
 
 img_path <- paste0("./plots/shots/", home_team, "_vs_", away_team, ".png")
 

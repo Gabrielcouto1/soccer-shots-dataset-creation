@@ -1,7 +1,7 @@
 library("rjson")
 
-get_match_outcome <- function(match) {
-    matches_data <- fromJSON(file = "./data/copa_america_24_matches.json")
+get_match_outcome <- function(match, competition) {
+    matches_data <- fromJSON(file = paste0("./data/matches_list/", competition, "_matches.json"))
     
 
     match_parts <- strsplit(match, "_vs_")[[1]]
