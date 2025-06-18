@@ -2,7 +2,7 @@ library(ggplot2)
 library(gridExtra)
 library(grid)
 source("./r/utils/get_match_outcome.r")
-plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_team){
+plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_team, competition){
     home_prob <- home_prob*100
     draw_prob <- draw_prob*100
     away_prob <- away_prob*100
@@ -49,7 +49,7 @@ plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_te
       	theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
 
 	outcome_text <- textGrob(
-        paste(home_team, " (",get_match_outcome(match), ") ",away_team, sep=""),
+        paste(home_team, " (",get_match_outcome(match, competition), ") ",away_team, sep=""),
         x = 2, y = 2.8, just = "centre", gp = gpar(fontsize = 25))
 
     home_prob_text <- textGrob(
