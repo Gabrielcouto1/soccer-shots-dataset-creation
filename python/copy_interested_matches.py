@@ -4,8 +4,8 @@ import shutil
 
 
 
-matches_source_folder     = "../analise-futebol/data/la_liga_matches"
-events_source_folder      = "../StatsBomb-Data/open-data/data/events"
+matches_source_folder     = "../../analise-futebol/data/la_liga_matches"
+events_source_folder      = "../../StatsBomb-Data/open-data/data/events"
 events_destination_folder = "data/events_la_liga"
 
 ids    = []
