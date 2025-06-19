@@ -7,59 +7,62 @@ source("./r/utils/get_match_json.r")
 
 competitions <- c("bundesliga", "la_liga", "ligue_1", "premier_league", "serie_a")
 
-competition <- competitions[2]
-competition_folder <- paste0("./data/events/events_", competition, "/")
+for(i in 1:length(competitions)){
+    competition <- competitions[i]
+    competition_folder <- paste0("./data/events/events_", competition, "/")
 
-all_matches_jsons <- list.files(path=competition_folder, pattern="\\.json$", full.names=TRUE)
+    all_matches_jsons <- list.files(path=competition_folder, pattern="\\.json$", full.names=TRUE)
 
-list_of_shot_dfs <- list()
+    list_of_shot_dfs <- list()
 
-shot_event_id  <- 16 # 16 = shot 30 = pass
-all_shots_data <- list()
-match_index <- 1
+    shot_event_id  <- 16 # 16 = shot 30 = pass
+    all_shots_data <- list()
+    match_index <- 1
 
-for (match_file_path in all_matches_jsons){
-    print(paste0("Processing match ", match_index, ": ", basename(match_file_path), ""))
-    
-    match_index      <- match_index + 1
-    match_json       <- fromJSON(file=match_file_path)
-
-    home_team        <- match_json[[1]]$team$name
-    away_team        <- match_json[[2]]$team$name
-    season           <- match_json[[1]]$season
-    match_id         <- match_json[[1]]$match_id
-    competition_name <- match_json[[1]]$competition_name
-
-    all_shot_events <- Filter(function(play) !is.null(play$type$id) && play$type$id == shot_event_id, match_json)
-
-    if (length(all_shot_events) > 0) {
-        list_of_shot_data <- lapply(all_shot_events, get_shot_data, 
-                                    home_team=home_team, 
-                                    away_team=away_team, 
-                                    season=season,
-                                    match_id=match_id,
-                                    competition_name=competition_name)
+    for (match_file_path in all_matches_jsons){
+        print(paste0("Processing match ", match_index, ": ", basename(match_file_path), ""))
         
-        shots_from_single_match_df <- dplyr::bind_rows(list_of_shot_data)
+        match_index      <- match_index + 1
+        match_json       <- fromJSON(file=match_file_path)
+
+        home_team        <- match_json[[1]]$team$name
+        away_team        <- match_json[[2]]$team$name
+        season           <- match_json[[1]]$season
+        match_id         <- match_json[[1]]$match_id
+        competition_name <- match_json[[1]]$competition_name
+
+        all_shot_events <- Filter(function(play) !is.null(play$type$id) && play$type$id == shot_event_id, match_json)
+
+        if (length(all_shot_events) > 0) {
+            list_of_shot_data <- lapply(all_shot_events, get_shot_data, 
+                                        home_team=home_team, 
+                                        away_team=away_team, 
+                                        season=season,
+                                        match_id=match_id,
+                                        competition_name=competition_name)
+            
+            shots_from_single_match_df <- dplyr::bind_rows(list_of_shot_data)
+            
+            list_of_shot_dfs[[length(list_of_shot_dfs) + 1]] <- shots_from_single_match_df
+            
+        } else {
+            print(paste("No shots found in", basename(match_file_path), ""))
+        }
+    }
+
+    if (length(list_of_shot_dfs) > 0) {
+        all_shots_dataset <- dplyr::bind_rows(list_of_shot_dfs)
+
+        print(paste("Total number of shots collected:", nrow(all_shots_dataset), ""))
+        print(head(all_shots_dataset))
+        str(all_shots_dataset)
         
-        list_of_shot_dfs[[length(list_of_shot_dfs) + 1]] <- shots_from_single_match_df
-        
+        csv_file_path <- paste0("./datasets/", competition, "_shots.csv")
+        write.csv(all_shots_dataset, file = csv_file_path, row.names = FALSE)
+        print(paste("Dataset saved to:", csv_file_path, ""))
+        print(paste("Found", length(all_matches_jsons), "match files to process."))
     } else {
-        print(paste("No shots found in", basename(match_file_path), ""))
+        print("an error has ocurred")
     }
 }
 
-if (length(list_of_shot_dfs) > 0) {
-    all_shots_dataset <- dplyr::bind_rows(list_of_shot_dfs)
-
-    print(paste("Total number of shots collected:", nrow(all_shots_dataset), ""))
-    print(head(all_shots_dataset))
-    str(all_shots_dataset)
-    
-    csv_file_path <- paste0("./datasets/", competition, "_shots.csv")
-    write.csv(all_shots_dataset, file = csv_file_path, row.names = FALSE)
-    print(paste("Dataset saved to:", csv_file_path, ""))
-    print(paste("Found", length(all_matches_jsons), "match files to process."))
-} else {
-    print("an error has ocurred")
-}
