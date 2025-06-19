@@ -4,7 +4,7 @@ source("./r/utils/plot/get_distance.r")
 source("./r/utils/create_dataset/get_goal_angle.r")
 source("./r/utils/create_dataset/freeze_frame.r")
 
-get_shot_data <- function(shot, home_team, away_team){
+get_shot_data <- function(shot, home_team, away_team, competition_name=competition_name, season=season, match_id=match_id){
     attacking_team <- shot$possession_team$name
 
     if(attacking_team==home_team){
@@ -14,10 +14,6 @@ get_shot_data <- function(shot, home_team, away_team){
         defending_team <- home_team
         is_home        <- 0
     }
-
-    competition <- 0
-    season      <- 0
-    match_id    <- 0
 
     source       <- shot$location
     destination  <- shot$shot$end_location
@@ -61,12 +57,12 @@ get_shot_data <- function(shot, home_team, away_team){
         is_goal <- 0
     }
 
-    return(list(attacking_team=attacking_team,
-                is_home=is_home,
-                defending_team=defending_team,
-                competition=competition,
+    return(list(competition=competition_name,
                 season=season,
                 match_id=match_id,
+                attacking_team=attacking_team,
+                is_home=is_home,
+                defending_team=defending_team,
                 shot_dist=shot_dist,
                 dist_to_goal=dist_to_goal,
                 shot_angle=shot_angle,

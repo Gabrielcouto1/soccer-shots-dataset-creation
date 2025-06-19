@@ -5,7 +5,9 @@ options("width"=200)
 source("./r/utils/create_dataset/get_shot_data.r")
 source("./r/utils/get_match_json.r")
 
-competition <- "serie_a"
+competitions <- c("bundesliga", "la_liga", "ligue_1", "premier_league", "serie_a")
+
+competition <- competitions[2]
 competition_folder <- paste0("./data/events/events_", competition, "/")
 
 all_matches_jsons <- list.files(path=competition_folder, pattern="\\.json$", full.names=TRUE)
@@ -19,15 +21,24 @@ match_index <- 1
 for (match_file_path in all_matches_jsons){
     print(paste0("Processing match ", match_index, ": ", basename(match_file_path), ""))
     
-    match_index <- match_index + 1
-    match_json <- fromJSON(file=match_file_path)
-    home_team <- match_json[[1]]$team$name
-    away_team <- match_json[[2]]$team$name
+    match_index      <- match_index + 1
+    match_json       <- fromJSON(file=match_file_path)
+
+    home_team        <- match_json[[1]]$team$name
+    away_team        <- match_json[[2]]$team$name
+    season           <- match_json[[1]]$season
+    match_id         <- match_json[[1]]$match_id
+    competition_name <- match_json[[1]]$competition_name
 
     all_shot_events <- Filter(function(play) !is.null(play$type$id) && play$type$id == shot_event_id, match_json)
 
     if (length(all_shot_events) > 0) {
-        list_of_shot_data <- lapply(all_shot_events, get_shot_data, home_team=home_team, away_team=away_team)
+        list_of_shot_data <- lapply(all_shot_events, get_shot_data, 
+                                    home_team=home_team, 
+                                    away_team=away_team, 
+                                    season=season,
+                                    match_id=match_id,
+                                    competition_name=competition_name)
         
         shots_from_single_match_df <- dplyr::bind_rows(list_of_shot_data)
         
