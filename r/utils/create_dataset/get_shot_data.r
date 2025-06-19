@@ -51,6 +51,8 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         is_penalty <- 0
     }
 
+    statsbomb_xg <- shot$shot$statsbomb_xg
+
     if(shot$shot$outcome$id==97){
         is_goal <- 1
     }else{
@@ -77,5 +79,6 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
                 opponents_in_goal_area=opponents_in_goal_area,
                 opponents_in_shot_path=opponents_in_shot_path,
                 is_penalty=is_penalty,
+                statsbomb_xg=statsbomb_xg,
                 is_goal=is_goal))
 }
