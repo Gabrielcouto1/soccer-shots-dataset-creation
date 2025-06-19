@@ -5,7 +5,7 @@ options("width"=200)
 source("./r/utils/create_dataset/get_shot_data.r")
 source("./r/utils/get_match_json.r")
 
-competition <- "la_liga"
+competition <- "serie_a"
 competition_folder <- paste0("./data/events/events_", competition, "/")
 
 all_matches_jsons <- list.files(path=competition_folder, pattern="\\.json$", full.names=TRUE)
@@ -41,7 +41,7 @@ if (length(list_of_shot_dfs) > 0) {
     print(head(all_shots_dataset))
     str(all_shots_dataset)
     
-    csv_file_path <- paste0("./dataset/", competition, "_shots.csv")
+    csv_file_path <- paste0("./datasets/", competition, "_shots.csv")
     write.csv(all_shots_dataset, file = csv_file_path, row.names = FALSE)
     print(paste("Dataset saved to:", csv_file_path, ""))
     print(paste("Found", length(all_matches_jsons), "match files to process."))
