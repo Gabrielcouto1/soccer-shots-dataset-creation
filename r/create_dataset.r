@@ -1,17 +1,23 @@
 library("rjson") 
 library("dplyr")
+library("tidyverse")
 options("width"=200)
 
 source("./r/utils/create_dataset/get_shot_data.r")
 source("./r/utils/get_match_json.r")
 
 competitions <- c("bundesliga", "la_liga", "ligue_1", "premier_league", "serie_a")
+execution_times <- c()
+matches_count   <- c()
+shots_collected <- c()
 
 for(i in 1:length(competitions)){
+    start_time <- Sys.time()
     competition <- competitions[i]
     competition_folder <- paste0("./data/events/events_", competition, "/")
 
     all_matches_jsons <- list.files(path=competition_folder, pattern="\\.json$", full.names=TRUE)
+    matches_count <- c(matches_count, length(all_matches_jsons))
 
     list_of_shot_dfs <- list()
 
@@ -52,10 +58,9 @@ for(i in 1:length(competitions)){
 
     if (length(list_of_shot_dfs) > 0) {
         all_shots_dataset <- dplyr::bind_rows(list_of_shot_dfs)
+        shots_collected   <- c(shots_collected, nrow(all_shots_dataset))
 
-        print(paste("Total number of shots collected:", nrow(all_shots_dataset), ""))
-        print(head(all_shots_dataset))
-        str(all_shots_dataset)
+        print(paste("Total number of shots collected:", shots_collected, ""))
         
         csv_file_path <- paste0("./datasets/", competition, "_shots.csv")
         write.csv(all_shots_dataset, file = csv_file_path, row.names = FALSE)
@@ -64,5 +69,27 @@ for(i in 1:length(competitions)){
     } else {
         print("an error has ocurred")
     }
+    end_time <- Sys.time()
+
+    execution_times <- c(execution_times, end_time - start_time)
 }
 
+csv_files <- c()
+
+for(i in 1:length(competitions)){
+    cat(paste0("--------------------------------------------------------------------------------\n",
+               "Time taken for ", competitions[i], ": ", execution_times[i], " minutes.\n",
+               "Processed ", matches_count[i], " matches.\n",
+               "Collected ", shots_collected[i], " shots.\n"))
+    csv_files <- c(csv_files, paste0("./datasets/", competitions[i], "_shots.csv"))
+}
+
+cat(paste0("\n\n================================================================================\n",
+             "Time taken in total: ", sum(execution_times), " minutes.\n",
+             "Processed ", sum(matches_count), " matches in total.\n",
+             "Collected ", sum(shots_collected), " shots in total.\n"))
+
+combined_df <- map_dfr(csv_files, read_csv, show_col_types = FALSE)
+write_csv(combined_df, "./datasets/shots.csv")
+
+cat(paste0("\n\n Combined all ", length(competitions), " datasets into one and saved it into ./datasets/shots.csv."))
