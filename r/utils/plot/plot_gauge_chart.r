@@ -69,9 +69,20 @@ plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_te
         text,
         x = -2, y = 0.35, just = "left", gp = gpar(fontsize = 11))
 
+	dir_path <- "./plots/gauge/"
+    file_name <- paste0(match, ".png")
+    file_path <- paste0(dir_path, file_name)
+    
+    if (!dir.exists(dir_path)) {
+        dir.create(dir_path, recursive = TRUE)
+    }
+
+    # Open the PNG device with specified dimensions for better quality
+    png(file_path, width = 10, height = 8, units = "in", res = 300)
     grid.arrange(
       gauge_chart,
       arrangeGrob(outcome_text, home_prob_text, away_prob_text, description, nrow = 1),
       heights = c(0.5, 0.1)
     )
+	dev.off()
 }
