@@ -14,16 +14,20 @@ list_of_shot_dfs <- list()
 
 shot_event_id  <- 16 # 16 = shot 30 = pass
 all_shots_data <- list()
+match_index <- 1
 
 for (match_file_path in all_matches_jsons){
-    print(paste("Processing match:", basename(match_file_path), ""))
+    print(paste0("Processing match ", match_index, ": ", basename(match_file_path), ""))
     
+    match_index <- match_index + 1
     match_json <- fromJSON(file=match_file_path)
+    home_team <- match_json[[1]]$team$name
+    away_team <- match_json[[2]]$team$name
 
     all_shot_events <- Filter(function(play) !is.null(play$type$id) && play$type$id == shot_event_id, match_json)
 
     if (length(all_shot_events) > 0) {
-        list_of_shot_data <- lapply(all_shot_events, get_shot_data)
+        list_of_shot_data <- lapply(all_shot_events, get_shot_data, home_team=home_team, away_team=away_team)
         
         shots_from_single_match_df <- dplyr::bind_rows(list_of_shot_data)
         
