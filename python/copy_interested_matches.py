@@ -2,11 +2,11 @@ import json
 import os
 import shutil
 
+competition = "bundesliga"
 
-
-matches_source_folder     = "../../analise-futebol/data/la_liga_matches"
+matches_source_folder     = f"../../analise-futebol/data/matches_list/{competition}_matches"
 events_source_folder      = "../../StatsBomb-Data/open-data/data/events"
-events_destination_folder = "data/events_la_liga"
+events_destination_folder = f"../data/events/events_{competition}"
 
 ids    = []
 team1 = []
