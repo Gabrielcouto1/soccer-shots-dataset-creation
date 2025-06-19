@@ -11,6 +11,10 @@ execution_times <- c()
 matches_count   <- c()
 shots_collected <- c()
 
+if (!dir.exists("./datasets")) {
+  dir.create("./datasets")
+} 
+
 for(i in 1:length(competitions)){
     start_time <- Sys.time()
     competition <- competitions[i]
