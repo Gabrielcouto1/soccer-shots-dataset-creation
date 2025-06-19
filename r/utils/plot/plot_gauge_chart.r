@@ -2,14 +2,14 @@ library(ggplot2)
 library(gridExtra)
 library(grid)
 source("./r/utils/get_match_outcome.r")
-plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_team, competition){
+plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_team, match_id, competition){
     home_prob <- home_prob*100
     draw_prob <- draw_prob*100
     away_prob <- away_prob*100
 
     posicao_ponteiro <- home_prob
 
-	match <- paste0(home_team, "_vs_", away_team)
+	  match <- paste0(home_team, "_vs_", away_team)
 
     cores <- setNames(c("#00FF00", "#838383", "#FF0000", "white"), 
                  	  c(home_team, "Draw", away_team, "Invisível"))
@@ -49,7 +49,7 @@ plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_te
       	theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"))
 
 	outcome_text <- textGrob(
-        paste(home_team, " (",get_match_outcome(match, competition), ") ",away_team, sep=""),
+        paste(home_team, " (",get_match_outcome(match, competition, match_id), ") ",away_team, sep=""),
         x = 2, y = 2.8, just = "centre", gp = gpar(fontsize = 25))
 
     home_prob_text <- textGrob(
@@ -70,7 +70,7 @@ plot_gauge_chart <- function(home_prob, draw_prob, away_prob, home_team, away_te
         x = -2, y = 0.35, just = "left", gp = gpar(fontsize = 11))
 
 	dir_path <- "./plots/gauge/"
-    file_name <- paste0(match, ".png")
+    file_name <- paste0(match, "_", match_id, ".png")
     file_path <- paste0(dir_path, file_name)
     
     if (!dir.exists(dir_path)) {

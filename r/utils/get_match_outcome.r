@@ -1,37 +1,27 @@
 library("rjson")
 
-get_match_outcome <- function(match, competition) {
-    matches_data <- fromJSON(file = paste0("./data/matches_list/", competition, "_matches.json"))
+get_match_outcome <- function(match, competition, match_id) {
+    folder_path <- paste0("./data/matches_list/", competition, "_matches")
+    json_files <- list.files(path = folder_path, pattern = "\\.json$", full.names = TRUE)
     
-
-    match_parts <- strsplit(match, "_vs_")[[1]]
-    
-    if (length(match_parts) != 2) {
-        stop("Match string must be in format 'Team1_vs_Team2'")
+    if (length(json_files) == 0) {
+        stop(paste("No JSON files found in the specified folder:", folder_path))
     }
     
-    home_team_name <- match_parts[1]
-    away_team_name <- match_parts[2]
     
-    match_found <- FALSE
-    for (i in 1:length(matches_data)) {
-      match_info <- matches_data[[i]]
-
-      if (match_info$home_team$home_team_name == home_team_name && 
-            match_info$away_team$away_team_name == away_team_name) {
-            
+    for (file_path in json_files) {
+    matches_data <- fromJSON(file = file_path)
+    
+    for (match_info in matches_data) {
+      if (!is.null(match_info$match_id) && match_info$match_id == match_id) {
         home_score <- match_info$home_score
         away_score <- match_info$away_score
-
-        result <- paste0(home_score, "x", away_score)
-        match_found <- TRUE
-        break
+        
+        return(paste0(home_score, "x", away_score))
       }
     }
-    
-    if (!match_found) {
-        stop(paste("Match not found:", match))
-    }
-    
-    return(result)
+  }
+  
+  stop(paste("Match with ID not found:", match_id))
+
 }   

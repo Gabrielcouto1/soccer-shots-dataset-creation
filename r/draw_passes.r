@@ -5,13 +5,14 @@ source("./r/utils/plot/plot_empty_field.r")
 source("./r/utils/get_related_event_id.r")
 source("./r/utils/get_match_json.r")
 
-home_team <- "Argentina"
-away_team <- "Canada"
-competition <- "copa_america_24"
+home_team   <- "Real Madrid"
+away_team   <- "Barcelona"
+match_id    <- "68319"
+competition <- "la_liga"
 
-match_json <- get_match_json(home_team, away_team, competition)
+match_json <- get_match_json(home_team, away_team, match_id, competition)
 
-img_path <- paste0("./plots/passes/", home_team, "_vs_", away_team, ".png")
+img_path <- paste0("./plots/passes/", home_team, "_vs_", away_team, "_", match_id, ".png")
 
 width  <- match_json[[5]]$location[1]*2
 height <- match_json[[5]]$location[2]*2
