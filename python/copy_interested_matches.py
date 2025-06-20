@@ -9,7 +9,7 @@ for i in range(len(competitions)):
     competition = competitions[i]
     competition_name = competition_names[i]
 
-    matches_source_folder   = f"../../analise-futebol/data/matches_list/{competition}_matches"
+    matches_source_folder   = f"../../soccer-shots-dataset-creation/data/matches_list/{competition}_matches"
     events_source_folder    = "../../open-data/data/events"
     events_destination_folder = f"../data/events/events_{competition}"
 
