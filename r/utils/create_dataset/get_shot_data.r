@@ -15,11 +15,12 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         is_home        <- 0
     }
 
-    source       <- shot$location
-    destination  <- shot$shot$end_location
-    shot_dist    <- get_distance(source, destination)
-    dist_to_goal <- get_distance(source, c(120,40))
-    shot_angle   <- get_goal_angle(source)
+    shooter_position <- shot$position$name
+    source           <- shot$location
+    destination      <- shot$shot$end_location
+    shot_dist        <- get_distance(source, destination)
+    dist_to_goal     <- get_distance(source, c(120,40))
+    shot_angle       <- get_goal_angle(source)
 
     shot_technique <- shot$shot$technique$name
     body_part      <- shot$shot$body_part$name
@@ -51,6 +52,12 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         is_penalty <- 0
     }
 
+    if(!is.null(shot$shot$open_goal)){
+        is_open_goal <- 1
+    } else{
+        is_open_goal <- 0
+    }
+
     statsbomb_xg <- shot$shot$statsbomb_xg
     outcome      <- shot$shot$outcome$name
 
@@ -63,6 +70,7 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
     return(list(competition=competition_name,
                 season=season,
                 match_id=match_id,
+                shooter_position=shooter_position,
                 attacking_team=attacking_team,
                 is_home=is_home,
                 defending_team=defending_team,
@@ -80,6 +88,7 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
                 opponents_in_goal_area=opponents_in_goal_area,
                 opponents_in_shot_path=opponents_in_shot_path,
                 is_penalty=is_penalty,
+                is_open_goal=is_open_goal,
                 statsbomb_xg=statsbomb_xg,
                 outcome=outcome,
                 is_goal=is_goal))
