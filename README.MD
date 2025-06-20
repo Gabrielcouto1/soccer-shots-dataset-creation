@@ -37,6 +37,7 @@ cd ..
 cd ..
 rm -rf open-data
 ```
+***
 
 ### Executing the R script
 Now that you have all files necessary copyied to your folder, you can excecute the file "r/create_dataset" on a R interpreter or in RStudio.
@@ -45,14 +46,15 @@ After executing this file, you will have all datasets in the folder 'datasets'.
 
 | File Name                             | Description                                                                   | Number of matches processed | Number of shots (rows) | Numbem of columns |
 | :------------------------------------ | :---------------------------------------------------------------------------- | :-------------------------- | :--------------------- | :---------------- |
-| 'datasets/bundesliga_shots.csv'       | Dataset of all shots taken in available Bundesliga matches.                   | 340                         | 8.747                  | 25                |
-| 'datasets/la_liga_shots.csv'          | Dataset of all shots taken in available La Liga matches.                      | 867                         | 21.182                 | 25                |
-| 'datasets/lige_1_shots.csv'           | Dataset of all shots taken in available Ligue 1 matches.                      | 435                         | 10.346                 | 25                |
-| 'datasets/premier_league_shots.csv'   | Dataset of all shots taken in available Premier League matches.               | 418                         | 10.837                 | 25                |
-| 'datasets/serie_a_shots.csv'          | Dataset of all shots taken in available Serie A matches.                      | 381                         | 10.033                 | 25                |
-| 'datasets/shots.csv'                  | Dataset of all shots taken all 5 competitions combined into this one.         | 2.441                       | 61.145                 | 25                |
+| `datasets/bundesliga_shots.csv`       | Dataset of all shots taken in available Bundesliga matches.                   | 340                         | 8.747                  | 25                |
+| `datasets/la_liga_shots.csv`          | Dataset of all shots taken in available La Liga matches.                      | 867                         | 21.182                 | 25                |
+| `datasets/lige_1_shots.csv`           | Dataset of all shots taken in available Ligue 1 matches.                      | 435                         | 10.346                 | 25                |
+| `datasets/premier_league_shots.csv`   | Dataset of all shots taken in available Premier League matches.               | 418                         | 10.837                 | 25                |
+| `datasets/serie_a_shots.csv`          | Dataset of all shots taken in available Serie A matches.                      | 381                         | 10.033                 | 25                |
+| `datasets/shots.csv`                  | Dataset of all shots taken all 5 competitions combined into this one.         | 2.441                       | 61.145                 | 25                |
 
 ***
+
 ## Data Dictionary
 
 This table provides a detailed description of each column in the datasets.
@@ -85,3 +87,42 @@ This table provides a detailed description of each column in the datasets.
 | `outcome`                   | The outcome, result of the shot.                                                                                                            | String            | e.g., 'Blocked', 'Goal', 'Off T', 'Post', 'Saved', 'Wayward', 'Saved Off T', 'Saved To Post'.             |
 | `is_goal`                   | Indicates if the shot resulted in a goal.                                                                                                   | Integer (Boolean) | `1` for a goal, `0` for no goal.                                                                          |
 
+
+*** 
+# Appendix A
+### Possible positions in column `shooter_position`
+| Position Number | Position Abbreviation | Position Name             |
+|:--------------- |:--------------------- |:------------------------- |
+| 1               | GK                    | Goalkeeper                |
+| 2               | RB                    | Right Back                |
+| 3               | RCB                   | Right Center Back         |
+| 4               | CB                    | Center Back               |
+| 5               | LCB                   | Left Center Back          |
+| 6               | LB                    | Left Back                 |
+| 7               | RWB                   | Right Wing Back           |
+| 8               | LWB                   | Left Wing Back            |
+| 9               | RDM                   | Right Defensive Midfield  |
+| 10              | CDM                   | Center Defensive Midfield |
+| 11              | LDM                   | Left Defensive Midfield   |
+| 12              | RM                    | Right Midfield            |
+| 13              | RCM                   | Right Center Midfield     |
+| 14              | CM                    | Center Midfield           |
+| 15              | LCM                   | Left Center Midfield      |
+| 16              | LM                    | Left Midfield             |
+| 17              | RW                    | Right Wing                |
+| 18              | RAM                   | Right Attacking Midfield  |
+| 19              | CAM                   | Center Attacking Midfield |
+| 20              | LAM                   | Left Attacking Midfield   |
+
+***
+# Appendix B
+## `Shot Angle`
+Suppose the Red dot is the location the shot was taken. Draw two lines going to each one of the goal posts. The α is the shot angle.
+![Appendix B](plots/Appendix_B.png)
+ 
+***
+# Appendix C
+### `Opponents in shot path`
+The variable opponents in shot path counts how many ennemy players are there in the area of the triangle drawn in appendix B.
+The opponents in the shot path are the cyan points. They are inside the area of the projected triangle. The number of Opponents in shot path will be 4 for this example shot.
+![Appendix C](plots/Appendix_C.png)
