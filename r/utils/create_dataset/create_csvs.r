@@ -50,7 +50,8 @@ create_csvs <- function(competitions_list) {
                                             away_team=away_team, 
                                             season=season,
                                             match_id=match_id,
-                                            competition_name=competition_name)
+                                            competition_name=competition_name,
+                                            match_json=match_json)
                 
                 shots_from_single_match_df <- dplyr::bind_rows(list_of_shot_data)
                 
