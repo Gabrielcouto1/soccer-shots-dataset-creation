@@ -79,22 +79,13 @@ for(i in 1:length(competitions)){
             print(paste("No shots found in", basename(match_file_path), ""))
         }
     }
+    all_shots_dataset <- dplyr::bind_rows(list_of_shot_dfs)
+    shots_collected   <- c(shots_collected, nrow(all_shots_dataset))
 
-    if (length(list_of_shot_dfs) > 0) {
-        all_shots_dataset <- dplyr::bind_rows(list_of_shot_dfs)
-        shots_collected   <- c(shots_collected, nrow(all_shots_dataset))
+    csv_file_path <- paste0("./datasets/", competition, "_shots.csv")
+    write.csv(all_shots_dataset, file = csv_file_path, row.names = FALSE)
 
-        print(paste("Total number of shots collected:", shots_collected, ""))
-        
-        csv_file_path <- paste0("./datasets/", competition, "_shots.csv")
-        write.csv(all_shots_dataset, file = csv_file_path, row.names = FALSE)
-        print(paste("Dataset saved to:", csv_file_path, ""))
-        print(paste("Found", length(all_matches_jsons), "match files to process."))
-    } else {
-        print("an error has ocurred")
-    }
     end_time <- Sys.time()
-
     execution_times <- c(execution_times, end_time - start_time)
 }
 

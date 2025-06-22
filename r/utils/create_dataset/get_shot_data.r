@@ -28,10 +28,12 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
     shot_angle   <- get_goal_angle(source)
     
     # Situational Flags
-    is_penalty   <- ifelse(shot$shot$type$id == 88, 1, 0)
-    is_ca        <- ifelse(shot$play_pattern$name == "From Counter", 1, 0)
-    is_open_goal <- ifelse(!is.null(shot$shot$open_goal), 1, 0)
-    
+    is_ca         <- ifelse(shot$play_pattern$name == "From Counter", 1, 0)
+    is_penalty    <- ifelse(shot$shot$type$id == 88, 1, 0)
+    is_open_goal  <- ifelse(!is.null(shot$shot$open_goal), 1, 0)
+    is_first_time <- ifelse(!is.null(shot$shot$first_time), 1, 0)
+    is_one_on_one <- ifelse(!is.null(shot$shot$one_on_one), 1, 0)
+
     # Freeze Frame Analysis (player in frame locations)
     if (is_penalty == 1) {
         teammates_in_frame        <- 0
@@ -76,6 +78,8 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         is_ca = is_ca,
         is_penalty = is_penalty,
         is_open_goal = is_open_goal,
+        is_first_time=is_first_time,
+        is_one_on_one=is_one_on_one,
         teammates_in_frame = teammates_in_frame,
         opponents_in_frame = opponents_in_frame,
         closest_opponent_dist = closest_opponent_dist,
