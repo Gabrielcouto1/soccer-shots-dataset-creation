@@ -46,12 +46,12 @@ After executing this file, you will have all datasets in the folder 'datasets'.
 
 | File Name                             | Description                                                                   | Number of matches processed | Number of shots (rows) | Numbem of columns |
 | :------------------------------------ | :---------------------------------------------------------------------------- | :-------------------------- | :--------------------- | :---------------- |
-| `datasets/bundesliga_shots.csv`       | Dataset of all shots taken in available Bundesliga matches.                   | 340                         | 8.747                  | 34                |
-| `datasets/la_liga_shots.csv`          | Dataset of all shots taken in available La Liga matches.                      | 867                         | 21.182                 | 34                |
-| `datasets/lige_1_shots.csv`           | Dataset of all shots taken in available Ligue 1 matches.                      | 435                         | 10.346                 | 34                |
-| `datasets/premier_league_shots.csv`   | Dataset of all shots taken in available Premier League matches.               | 418                         | 10.837                 | 34                |
-| `datasets/serie_a_shots.csv`          | Dataset of all shots taken in available Serie A matches.                      | 381                         | 10.033                 | 34                |
-| `datasets/shots.csv`                  | Dataset of all shots taken all 5 competitions combined into this one.         | 2.441                       | 61.145                 | 34                |
+| `datasets/bundesliga_shots.csv`       | Dataset of all shots taken in available Bundesliga matches.                   | 340                         | 8.747                  | 35                |
+| `datasets/la_liga_shots.csv`          | Dataset of all shots taken in available La Liga matches.                      | 867                         | 21.182                 | 35                |
+| `datasets/lige_1_shots.csv`           | Dataset of all shots taken in available Ligue 1 matches.                      | 435                         | 10.346                 | 35                |
+| `datasets/premier_league_shots.csv`   | Dataset of all shots taken in available Premier League matches.               | 418                         | 10.837                 | 35                |
+| `datasets/serie_a_shots.csv`          | Dataset of all shots taken in available Serie A matches.                      | 381                         | 10.033                 | 35                |
+| `datasets/shots.csv`                  | Dataset of all shots taken all 5 competitions combined into this one.         | 2.441                       | 61.145                 | 35                |
 
 ***
 
@@ -67,6 +67,7 @@ This table provides a detailed description of each column in the datasets.
 | `match_id`                    | A unique identifier for the match the shot was taken.                                                                                           | Integer           | Any unique integer.                                                                                               |
 | `timestamp`                   | The time of the shot event within the match in seconds.                                                                                         | Integer           | Any non-negative integer.                                                                                         |
 | `period`                      | The period of the match when the shot occurred.                                                                                                 | Integer           | `1` (First Half), `2` (Second Half)                                                                               |
+| `seconds_since_previous_shot` | Time in seconds passed since previous shot.                                                                                                     | Integer or NA     | Any non-negative integer. If it's NA, it means there were no shots previous to this.                              |
 | `attacking_team`              | The team that took the shot.                                                                                                                    | String            | Name of a football team.                                                                                          |
 | `defending_team`              | The team that is defending against the shot.                                                                                                    | String            | Name of a football team.                                                                                          |
 | `is_home`                     | Indicates if the attacking team is the home team.                                                                                               | Integer (Boolean) | `1` for home team, `0` for away team.                                                                             |
