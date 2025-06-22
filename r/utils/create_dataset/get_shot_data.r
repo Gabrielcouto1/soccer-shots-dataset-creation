@@ -3,6 +3,7 @@ library("rjson")
 source("./r/utils/plot/get_distance.r")
 source("./r/utils/create_dataset/get_goal_angle.r")
 source("./r/utils/create_dataset/freeze_frame.r")
+source("./r/utils/create_dataset/get_previous_shot_time.r")
 source("./r/utils/get_related_event.r")
 
 get_shot_data <- function(shot, home_team, away_team, competition_name=competition_name, season=season, match_id=match_id, match_json){
@@ -14,9 +15,10 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
     defending_team <- ifelse(is_home == 1, away_team, home_team)
     
     # Time and period related characteristics
-    timestamp <- (shot$minute * 60) + shot$second
-    period    <- shot$period
-    
+    timestamp                   <- (shot$minute * 60) + shot$second
+    period                      <- shot$period
+    seconds_since_previous_shot <- get_previous_shot_time(match_json, shot)
+
     # Shot characteristics
     shooter_position <- shot$position$name
     shot_technique   <- shot$shot$technique$name
@@ -91,6 +93,7 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         match_id = match_id,
         timestamp = timestamp,
         period = period,
+        seconds_since_previous_shot = seconds_since_previous_shot,
         attacking_team = attacking_team,
         defending_team = defending_team,
         is_home = is_home,
