@@ -2,7 +2,7 @@ library("rjson")
 
 source("./r/utils/plot/get_distance.r")
 source("./r/utils/plot/plot_empty_field.r")
-source("./r/utils/get_related_event_id.r")
+source("./r/utils/get_related_event.r")
 source("./r/utils/get_match_json.r")
 
 home_team   <- "Real Madrid"
@@ -24,7 +24,7 @@ plot_field(width, height)
 for (i in 1:length(match_json)){
     if((match_json[[i]]$type$id) == 30){
         related_event_id    <- match_json[[i]]$related_events[1]
-        related_event_index <-get_related_event_index(related_event_id, match_json)
+        related_event_index <- get_related_event(related_event_id, match_json)$index
         related_event_type  <- match_json[[related_event_index]]$type$id
 
         source      <- match_json[[i]]$location
