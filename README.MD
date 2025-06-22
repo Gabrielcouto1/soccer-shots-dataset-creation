@@ -4,7 +4,7 @@
 
 ## Step by step to create the dataset from Statsbomb Open-data
 
-You will need to clone both my repository and Statsbomb open-data repository. This is due to copyright policies: I can't provide neither my dataset I made nor statsbomb's public data.
+You will need to clone both my repository and Statsbomb open-data repository. Due to copyright policies, I cannot provide the dataset I created nor the original public data from Statsbomb directly.
 ```
 git clone https://github.com/Gabrielcouto1/soccer-shots-dataset-creation
 ```
@@ -12,7 +12,7 @@ git clone https://github.com/Gabrielcouto1/soccer-shots-dataset-creation
 git clone https://github.com/statsbomb/open-data/
 ```
 
-Now the first step is to copy the JSONs needed to create the dataset. I created two python scripts to easily select all data available from the five big Europe Leagues: 'Bundesliga', 'La Liga', 'Ligue 1', 'Premier league' and 'Serie A'.
+The first step is to copy the necessary JSON files to create the dataset. I created two python scripts to easily select all data available from the five big Europe Leagues: 'Bundesliga', 'La Liga', 'Ligue 1', 'Premier league' and 'Serie A'.
 To do this, move to the python scripts directory: 
 
 ```
@@ -40,18 +40,18 @@ rm -rf open-data
 ***
 
 ### Executing the R script
-Now that you have all files necessary copyied to your folder, you can excecute the file "r/create_dataset" on a R interpreter or in RStudio.
-**The script uses locations, so it's very important that you set the working directory of you R interpreter to the folder 'soccer-shots-dataset-creation'.**
+Now that you have all files necessary copied to your folder, you can execute the file "r/create_dataset" on a R interpreter or in RStudio.
+**The script uses relative paths, so it is crucial to set the working directory of your R interpreter to the root of the 'soccer-shots-dataset-creation' repository.**
 After executing this file, you will have all datasets in the folder 'datasets'. 
 
-| File Name                             | Description                                                                   | Number of matches processed | Number of shots (rows) | Numbem of columns |
-| :------------------------------------ | :---------------------------------------------------------------------------- | :-------------------------- | :--------------------- | :---------------- |
-| `datasets/bundesliga_shots.csv`       | Dataset of all shots taken in available Bundesliga matches.                   | 340                         | 8.747                  | 35                |
-| `datasets/la_liga_shots.csv`          | Dataset of all shots taken in available La Liga matches.                      | 867                         | 21.182                 | 35                |
-| `datasets/lige_1_shots.csv`           | Dataset of all shots taken in available Ligue 1 matches.                      | 435                         | 10.346                 | 35                |
-| `datasets/premier_league_shots.csv`   | Dataset of all shots taken in available Premier League matches.               | 418                         | 10.837                 | 35                |
-| `datasets/serie_a_shots.csv`          | Dataset of all shots taken in available Serie A matches.                      | 381                         | 10.033                 | 35                |
-| `datasets/shots.csv`                  | Dataset of all shots taken all 5 competitions combined into this one.         | 2.441                       | 61.145                 | 35                |
+| File Name                             | Description                                                                       | Number of matches processed | Number of shots (rows) | Number of columns |
+| :------------------------------------ | :-------------------------------------------------------------------------------- | :-------------------------- | :--------------------- | :---------------- |
+| `datasets/bundesliga_shots.csv`       | Dataset of all shots taken in available Bundesliga matches.                       | 340                         | 8.747                  | 35                |
+| `datasets/la_liga_shots.csv`          | Dataset of all shots taken in available La Liga matches.                          | 867                         | 21.182                 | 35                |
+| `datasets/ligue_1_shots.csv`          | Dataset of all shots taken in available Ligue 1 matches.                          | 435                         | 10.346                 | 35                |
+| `datasets/premier_league_shots.csv`   | Dataset of all shots taken in available Premier League matches.                   | 418                         | 10.837                 | 35                |
+| `datasets/serie_a_shots.csv`          | Dataset of all shots taken in available Serie A matches.                          | 381                         | 10.033                 | 35                |
+| `datasets/shots.csv`                  | Dataset of all shots taken in all 5 competitions, combined into this single file. | 2.441                       | 61.145                 | 35                |
 
 ***
 
@@ -71,10 +71,10 @@ This table provides a detailed description of each column in the datasets.
 | `attacking_team`              | The team that took the shot.                                                                                                                    | String            | Name of a football team.                                                                                          |
 | `defending_team`              | The team that is defending against the shot.                                                                                                    | String            | Name of a football team.                                                                                          |
 | `is_home`                     | Indicates if the attacking team is the home team.                                                                                               | Integer (Boolean) | `1` for home team, `0` for away team.                                                                             |
-| `shooter_position`            | Indicates the shooter main play position.                                                                                                       | String            | e.g., 'Goalkeeper'. Check appendix A.                                                                             |
+| `shooter_position`            | Indicates the shooter main playing position.                                                                                                    | String            | e.g., 'Goalkeeper'. Check appendix A.                                                                             |
 | `shot_dist`                   | The distance the ball traveled from the place the shot was taken.                                                                               | Float             | Any positive floating-point number.                                                                               |
 | `dist_to_goal`                | The distance from the shot event to the goal line in meters.                                                                                    | Float             | Any positive floating-point number.                                                                               |
-| `shot_angle`                  | The angle of the shot in relation to the goal posts, in degrees. Check appendix B.                                                              | Float             | A float, typically between 0 and 180.                                                                             |
+| `shot_angle`                  | The angle of the shot in relation to the goal posts, in degrees. Check Appendix B.                                                              | Float             | A float, typically between 0 and 180.                                                                             |
 | `body_part`                   | The body part used to take the shot.                                                                                                            | String            | e.g., 'Right Foot', 'Left Foot', 'Head', 'Other'.                                                                 |
 | `shot_technique`              | The technique used for the shot.                                                                                                                | String            | e.g., 'Backheel', 'Diving Header', 'Half Volley', 'Lob', 'Normal', 'Overhead Kick', 'Volley'.                     |
 | `shot_type`                   | The type of play leading to the shot.                                                                                                           | String            | e.g., 'Open Play', 'Penalty', 'Free Kick', 'Corner', 'Kick Off'.                                                  |
@@ -85,15 +85,15 @@ This table provides a detailed description of each column in the datasets.
 | `is_open_goal`                | Indicates if the shot was taken with an open goal.                                                                                              | Integer (Boolean) | `1` for yes, `0` for no.                                                                                          |
 | `is_first_time`               | Indicates if the shot was taken with only one touch by the shooter.                                                                             | Integer (Boolean) | `1` for yes, `0` for no.                                                                                          |
 | `is_one_on_one`               | Indicates if the shooter was in a one-on-one situation with the goalkeeper.                                                                     | Integer (Boolean) | `1` for yes, `0` for no.                                                                                          |
-| `is_areial_win`               | Indicates if the shooter was in a aerial duel and won it.                                                                                       | Integer (Boolean) | `1` for yes, `0` for no.                                                                                          |
+| `is_aerial_win`               | Indicates if the shooter was in a aerial duel and won it.                                                                                       | Integer (Boolean) | `1` for yes, `0` for no.                                                                                          |
 | `teammates_in_frame`          | The number of teammates visible in the frame when the shot was taken.                                                                           | Integer           | Any non-negative integer.                                                                                         |
 | `opponents_in_frame`          | The number of opponents visible in the frame when the shot was taken.                                                                           | Integer           | Any non-negative integer.                                                                                         |
 | `closest_opponent_dist`       | The distance to the closest opponent at the time of the shot in meters.                                                                         | Float             | Any positive floating-point number.                                                                               |
-| `goalkeeper_dist`             | The distance of the goalkeeper from the shot location in meters.                                                                                | Float or NA       | Any positive floating-point number. If it's NA it indicates that the goalkeeper is not in the shot frame.         |
-| `goalkeeper_position`         | Name for the attribute option of goalkeeper's positioning before a shot.                                                                        | String or NA      | e.g., 'Moving', 'Prone', 'Set'.     If it's NA it indicates that the goalkeeper is not in the shot frame.         |
+| `goalkeeper_dist`             | The distance of the goalkeeper from the shot location in meters.                                                                                | Float or NA       | Any positive floating-point number. If it's NA, it indicates that the goalkeeper is not in the shot frame.        |
+| `goalkeeper_position`         | Name for the attribute option of goalkeeper's positioning before a shot.                                                                        | String or NA      | e.g., 'Moving', 'Prone', 'Set'.     If it's NA, it indicates that the goalkeeper is not in the shot frame.        |
 | `opponents_in_penalty_area`   | The number of opponents inside the penalty area.                                                                                                | Integer           | Any non-negative integer.                                                                                         |
 | `opponents_in_goal_area`      | The number of opponents inside the goal area.                                                                                                   | Integer           | Any non-negative integer.                                                                                         |
-| `opponents_in_shot_path`      | The number of opponents inside the triangle traced from the place the shot was taken and the two goal posts. Check appendix C.                  | Integer           | Any non-negative integer.                                                                                         |
+| `opponents_in_shot_path`      | The number of opponents inside the triangle traced from the place the shot was taken and the two goal posts. Check Appendix C.                  | Integer           | Any non-negative integer.                                                                                         |
 | `statsbomb_xg`                | The Expected Goals (xG) provided by Statsbomb. This represents the probability of a shot resulting in a goal based on historical data.          | Float             | A float between 0 and 1.                                                                                          |
 | `outcome`                     | The outcome, result of the shot.                                                                                                                | String            | e.g., 'Blocked', 'Goal', 'Off T', 'Post', 'Saved', 'Wayward', 'Saved Off T', 'Saved To Post'.                     |
 | `is_goal`                     | Indicates if the shot resulted in a goal.                                                                                                       | Integer (Boolean) | `1` for a goal, `0` for no goal.                                                                                  |
@@ -133,6 +133,8 @@ Suppose the Red dot is the location the shot was taken. Draw two lines going to 
 ***
 # Appendix C
 ### `Opponents in shot path`
-The variable opponents in shot path counts how many ennemy players are there in the area of the triangle drawn in appendix B.
-The opponents in the shot path are the cyan points. They are inside the area of the projected triangle. The number of Opponents in shot path will be 4 for this example shot.
+The variable opponents in shot path counts how many enemy players are there in the area of the triangle drawn in appendix B.
+The opponents in the shot path are the cyan points. They are inside the area of the projected triangle. 
+
 ![Appendix C](plots/Appendix_C.png)
+In this example, the value for `opponents_in_shot_path` would be 4.
