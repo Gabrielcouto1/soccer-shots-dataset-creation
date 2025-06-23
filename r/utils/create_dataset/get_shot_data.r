@@ -7,8 +7,6 @@ source("./r/utils/create_dataset/get_previous_shot_time.r")
 source("./r/utils/get_related_event.r")
 
 get_shot_data <- function(shot, home_team, away_team, competition_name=competition_name, season=season, match_id=match_id, match_json){
-    
-    
     # Team and Match Context
     attacking_team <- shot$possession_team$name
     is_home        <- ifelse(attacking_team == home_team, 1, 0)
@@ -28,6 +26,8 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
     # Spatial and Geometric Features
     source       <- shot$location
     destination  <- shot$shot$end_location
+    x_location   <- source[1]
+    y_location   <- source[2]
     shot_dist    <- get_distance(source, destination)
     dist_to_goal <- get_distance(source, c(120, 40))
     shot_angle   <- get_goal_angle(source)
@@ -98,6 +98,8 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         defending_team = defending_team,
         is_home = is_home,
         shooter_position = shooter_position,
+        x_location = x_location,
+        y_location = y_location,
         shot_dist = shot_dist,
         dist_to_goal = dist_to_goal,
         shot_angle = shot_angle,
