@@ -27,14 +27,15 @@ for (i in 1:length(match_json)){
         related_event_index <- get_related_event(related_event_id, match_json)$index
         related_event_type  <- match_json[[related_event_index]]$type$id
 
-        source      <- match_json[[i]]$location
-        destination <- match_json[[related_event_index]]$location
+        source        <- match_json[[i]]$location
+        source_y      <- height-source[2]
+        destination   <- match_json[[related_event_index]]$location
+        destination_y <- height-destination[2]
+        distance      <- get_distance(source, destination)
 
-        distance<-get_distance(source, destination)
-
-        points(source[1], source[2], col="red", pch=19)
-        points(destination[1], destination[2], col="blue", pch=19)
-        segments(source[1], source[2], destination[1], destination[2], col="grey")
+        points(source[1], source_y, col="red", pch=19)
+        points(destination[1], destination_y, col="blue", pch=19)
+        segments(source[1], source_y, destination[1], destination_y, col="grey")
     }
 }
 

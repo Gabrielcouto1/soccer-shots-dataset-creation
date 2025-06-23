@@ -15,6 +15,7 @@ match_json <- get_match_json(home_team, away_team, match_id, competition)
 
 img_path <- paste0("./plots/shots/", home_team, "_vs_", away_team, "_", match_id, ".png")
 
+
 width  <- match_json[[5]]$location[1]*2
 height <- match_json[[5]]$location[2]*2
 
@@ -31,7 +32,10 @@ for (i in 1:length(match_json)){
         
         if (current_play_type == 16){
             source      <- match_json[[i]]$location
-            destination <- match_json[[i]]$shot$end_location
+            source_y    <- height-source[2]
+
+            destination   <- match_json[[i]]$shot$end_location
+            destination_y <- height-destination[2]
 
             color_source <- "black"
             color_segment <- "red"
@@ -59,9 +63,10 @@ for (i in 1:length(match_json)){
         }
         distance<-get_distance(source, destination)
 
-        points(source[1], source[2], col=color_source, pch=19, cex=point_size)
-        segments(source[1], source[2], destination[1], destination[2], col=color_segment, lwd=1)
+        points(source[1], source_y, col=color_source, pch=19, cex=point_size)
+        segments(source[1], source_y, destination[1], destination_y, col=color_segment, lwd=1)
     }
 }
+
 mtext(paste0(home_team, " vs ", away_team), side = 1, line = 2, cex = 2)
 dev.off()
