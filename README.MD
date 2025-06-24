@@ -13,21 +13,28 @@ git clone https://github.com/statsbomb/open-data/
 ```
 
 The first step is to copy the necessary JSON files to create the dataset. I created two python scripts to easily select all data available from the five big Europe Leagues: 'Bundesliga', 'La Liga', 'Ligue 1', 'Premier league' and 'Serie A'.
+To do this, move to the python scripts directory: 
+
+```
+cd soccer-shots-dataset-creation/python/
+```
 
 First run the script to copy the matches list for each season of each 5 competitions:
 
 ```
-python3 soccer-shots-dataset-creation/python/copy_matches_lists.py 
+python3 copy_matches_lists.py 
 ```
 
 Now, with the matches list, you will run the script to collect each match's JSON. It will take from 20-30 minutes.
 
 ```
-python3 soccer-shots-dataset-creation/python/copy_interested_matches.py
+python3 copy_interested_matches.py
 ```
 
 Now, if you want, you can exclude Statsbomb's open-data repository, since it's quite large (18GB+):
 ```
+cd ..
+cd ..
 rm -rf open-data
 ```
 ***
