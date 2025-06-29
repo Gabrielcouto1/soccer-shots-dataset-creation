@@ -5,3 +5,4 @@ check_libraries()
 
 competitions <- c("bundesliga", "la_liga", "ligue_1", "premier_league", "serie_a")
 create_csvs(competition)
+    

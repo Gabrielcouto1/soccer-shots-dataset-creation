@@ -1,5 +1,3 @@
-library("rjson") 
-
 source("./r/utils/plot/get_distance.r")
 source("./r/utils/create_dataset/get_goal_angle.r")
 source("./r/utils/create_dataset/freeze_frame.r")

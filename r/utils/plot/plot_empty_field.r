@@ -1,5 +1,3 @@
-library("plotrix")
-
 plot_field <- function(width, height) {
     h <- height
     w <- width

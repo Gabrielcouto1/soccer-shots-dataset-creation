@@ -1,6 +1,9 @@
 source("./r/utils/xg/simulate_match_outcome.r")
 source("./r/utils/plot/plot_gauge_chart.r")
 source("./r/utils/get_match_json.r")
+source("./r/utils/check_libraries.r")
+
+check_libraries()
 
 home_team   <- "Real Madrid"
 away_team   <- "Barcelona"

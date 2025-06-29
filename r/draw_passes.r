@@ -1,9 +1,10 @@
-library("rjson") 
-
 source("./r/utils/plot/get_distance.r")
 source("./r/utils/plot/plot_empty_field.r")
 source("./r/utils/get_related_event.r")
 source("./r/utils/get_match_json.r")
+source("./r/utils/check_libraries.r")
+
+check_libraries()
 
 home_team   <- "Real Madrid"
 away_team   <- "Barcelona"

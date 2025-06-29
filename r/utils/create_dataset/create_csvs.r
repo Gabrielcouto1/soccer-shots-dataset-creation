@@ -1,8 +1,3 @@
-library("rjson") 
-library("dplyr")
-library("tidyverse")
-options("width"=200)
-
 source("./r/utils/create_dataset/get_shot_data.r")
 source("./r/utils/get_match_json.r")
 
