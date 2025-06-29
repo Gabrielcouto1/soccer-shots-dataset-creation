@@ -12,11 +12,13 @@ check_libraries <- function() {
 
     for (pkg in required_packages) {
         if (!requireNamespace(pkg, quietly = TRUE)) {
-            message("Installing missing package: ", pkg)
+            # print("Installing missing package: ", pkg)
             install.packages(pkg, dependencies = TRUE)
         } else {
-            message(pkg, " is already installed")
+            # print(pkg, " is already installed")
+            suppressPackageStartupMessages(library(pkg,character.only = TRUE, quietly=TRUE, warn.conflicts=FALSE))
         }
     }
+    print("Done loading all necessary packages!")
 }
 
