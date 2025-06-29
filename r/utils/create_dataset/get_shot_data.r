@@ -18,6 +18,7 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
     seconds_since_previous_shot <- get_previous_shot_time(match_json, shot)
 
     # Shot characteristics
+    shooter_name     <- shot$player$name
     shooter_position <- shot$position$name
     shot_technique   <- shot$shot$technique$name
     body_part        <- shot$shot$body_part$name
@@ -97,6 +98,7 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         attacking_team = attacking_team,
         defending_team = defending_team,
         is_home = is_home,
+        shooter_name = shooter_name,
         shooter_position = shooter_position,
         x_location = x_location,
         y_location = y_location,
