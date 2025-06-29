@@ -46,12 +46,12 @@ After executing this file, you will have all datasets in the folder 'datasets'.
 
 | File Name                             | Description                                                                       | Number of matches processed | Number of shots (rows) | Number of columns |
 | :------------------------------------ | :-------------------------------------------------------------------------------- | :-------------------------- | :--------------------- | :---------------- |
-| `datasets/bundesliga_shots.csv`       | Dataset of all shots taken in available Bundesliga matches.                       | 340                         | 8.747                  | 37                |
-| `datasets/la_liga_shots.csv`          | Dataset of all shots taken in available La Liga matches.                          | 867                         | 21.182                 | 37                |
-| `datasets/ligue_1_shots.csv`          | Dataset of all shots taken in available Ligue 1 matches.                          | 435                         | 10.346                 | 37                |
-| `datasets/premier_league_shots.csv`   | Dataset of all shots taken in available Premier League matches.                   | 418                         | 10.837                 | 37                |
-| `datasets/serie_a_shots.csv`          | Dataset of all shots taken in available Serie A matches.                          | 381                         | 10.033                 | 37                |
-| `datasets/shots.csv`                  | Dataset of all shots taken in all 5 competitions, combined into this single file. | 2.441                       | 61.145                 | 37                |
+| `datasets/bundesliga_shots.csv`       | Dataset of all shots taken in available Bundesliga matches.                       | 340                         | 8.747                  | 38                |
+| `datasets/la_liga_shots.csv`          | Dataset of all shots taken in available La Liga matches.                          | 867                         | 21.182                 | 38                |
+| `datasets/ligue_1_shots.csv`          | Dataset of all shots taken in available Ligue 1 matches.                          | 435                         | 10.346                 | 38                |
+| `datasets/premier_league_shots.csv`   | Dataset of all shots taken in available Premier League matches.                   | 418                         | 10.837                 | 38                |
+| `datasets/serie_a_shots.csv`          | Dataset of all shots taken in available Serie A matches.                          | 381                         | 10.033                 | 38                |
+| `datasets/shots.csv`                  | Dataset of all shots taken in all 5 competitions, combined into this single file. | 2.441                       | 61.145                 | 38                |
 
 ***
 
@@ -71,6 +71,7 @@ This table provides a detailed description of each column in the datasets.
 | `attacking_team`              | The team that took the shot.                                                                                                                    | String            | Name of a football team.                                                                                          |
 | `defending_team`              | The team that is defending against the shot.                                                                                                    | String            | Name of a football team.                                                                                          |
 | `is_home`                     | Indicates if the attacking team is the home team.                                                                                               | Integer (Boolean) | `1` for home team, `0` for away team.                                                                             |
+| `shooter_namr`                | The name of the player who took the shot.                                                                                                       | String            | e.g., 'Lionel Messi', 'Cristiano Ronaldo'                                                                         |
 | `shooter_position`            | Indicates the shooter main playing position.                                                                                                    | String            | e.g., 'Goalkeeper'. Check appendix A.                                                                             |
 | `shot_dist`                   | The distance the ball traveled from the place the shot was taken.                                                                               | Float             | Any positive floating-point number.                                                                               |
 | `x_position`                  | The x position of the place the shot was taken. (The field follows the proportions and dimmensions seen in Appendix B)                          | Float             | Any positive floating-point number.                                                                               |
