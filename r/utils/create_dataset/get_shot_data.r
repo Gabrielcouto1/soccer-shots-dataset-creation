@@ -23,13 +23,15 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
     shot_type        <- shot$shot$type$name
     
     # Spatial and Geometric Features
-    source       <- shot$location
-    destination  <- shot$shot$end_location
-    x_location   <- source[1]
-    y_location   <- source[2]
-    shot_dist    <- get_distance(source, destination)
-    dist_to_goal <- get_distance(source, c(120, 40))
-    shot_angle   <- get_goal_angle(source)
+    source         <- shot$location
+    destination    <- shot$shot$end_location
+    x_location     <- source[1]
+    y_location     <- source[2]
+    x_end_location <- destination[1] 
+    y_end_location <- destination[2] 
+    shot_dist      <- get_distance(source, destination)
+    dist_to_goal   <- get_distance(source, c(120, 40))
+    shot_angle     <- get_goal_angle(source)
     
     # Situational Flags
     is_from_cross <- 0
@@ -100,6 +102,8 @@ get_shot_data <- function(shot, home_team, away_team, competition_name=competiti
         shooter_position = shooter_position,
         x_location = x_location,
         y_location = y_location,
+        x_end_location = x_end_location,
+        y_end_location = y_end_location
         shot_dist = shot_dist,
         dist_to_goal = dist_to_goal,
         shot_angle = shot_angle,
