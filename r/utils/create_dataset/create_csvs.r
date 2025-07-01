@@ -7,7 +7,7 @@ create_csvs <- function(competitions_list) {
     matches_count   <- c()
     shots_collected <- c()
     total_matches   <- 2441
-
+    i <- 1
     if (!dir.exists("./datasets")) {
     dir.create("./datasets")
     }
@@ -27,9 +27,10 @@ create_csvs <- function(competitions_list) {
         match_index <- 1
 
         for (match_file_path in all_matches_jsons){
-            print(paste0("Processing match ", match_index, ": ", basename(match_file_path), ". ", round(match_index/total_matches*100, 2), "% done."))
+            print(paste0("Processing match ", match_index , " (", round(i/total_matches*100, 2), "%): " , basename(match_file_path)))
             
             match_index      <- match_index + 1
+            i <- i + 1  
             match_json       <- fromJSON(file=match_file_path)
 
             home_team        <- match_json[[1]]$team$name
