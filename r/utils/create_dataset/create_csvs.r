@@ -27,7 +27,10 @@ create_csvs <- function(competitions_list) {
         match_index <- 1
 
         for (match_file_path in all_matches_jsons){
-            print(paste0("Processing match ", match_index , " (", round(total_match_count/total_matches*100, 2), "%): " , basename(match_file_path)))
+            print(paste0("Processing match #", total_match_count , 
+            " (", round(total_match_count/total_matches*100, 1), "%): (" ,
+            competition,"'s match #", match_index,") ",
+            basename(match_file_path)))
             
             match_index       <- match_index + 1
             total_match_count <- total_match_count + 1  
